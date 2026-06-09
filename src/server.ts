@@ -1,15 +1,15 @@
 import Fastify, { type FastifyInstance } from "fastify";
 import fastifyStatic from "@fastify/static";
-import { join } from "node:path";
-import { pathToFileURL } from "node:url";
+import { dirname, join } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import QRCode from "qrcode";
 
 import { buildTonalReading } from "./buildReading.js";
 import { calculateTonalpohualli } from "./tonalpohualli.js";
 
-const DEFAULT_PORT = 3000;
 const SERVICE_NAME = "oraculo-tonalli-xolosarmy";
 const PAYMENT_URI = "ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk?amount=5000";
+const publicRoot = join(dirname(fileURLToPath(import.meta.url)), "public");
 
 export function buildServer(): FastifyInstance {
   const server = Fastify({
@@ -17,7 +17,7 @@ export function buildServer(): FastifyInstance {
   });
 
   void server.register(fastifyStatic, {
-    root: join(process.cwd(), "src", "public")
+    root: publicRoot
   });
 
   server.get("/health", async () => ({
@@ -59,10 +59,12 @@ export function buildServer(): FastifyInstance {
 
 async function start(): Promise<void> {
   const server = buildServer();
+  const port = Number(process.env.PORT) || 3000;
+  const host = process.env.HOST || "0.0.0.0";
 
   try {
-    await server.listen({ host: "0.0.0.0", port: DEFAULT_PORT });
-    console.log(`http://localhost:${DEFAULT_PORT}`);
+    await server.listen({ host, port });
+    console.log(`http://${host}:${port}`);
   } catch (error) {
     server.log.error(error);
     process.exitCode = 1;
