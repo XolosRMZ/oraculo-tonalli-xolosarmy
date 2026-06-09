@@ -1,6 +1,84 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { buildServer } from "../src/server.js";
+
+type FakeElement = {
+  hidden: boolean;
+  textContent: string;
+  value: string;
+  listeners: Record<string, () => void>;
+  classList: { toggle: ReturnType<typeof vi.fn> };
+  style: Record<string, string>;
+  addEventListener: (type: string, listener: () => void) => void;
+  querySelector: ReturnType<typeof vi.fn>;
+  replaceChildren: ReturnType<typeof vi.fn>;
+  setAttribute: ReturnType<typeof vi.fn>;
+  append: ReturnType<typeof vi.fn>;
+  select: ReturnType<typeof vi.fn>;
+  remove: ReturnType<typeof vi.fn>;
+};
+
+function createFakeElement(): FakeElement {
+  const element: FakeElement = {
+    hidden: false,
+    textContent: "",
+    value: "",
+    listeners: {},
+    classList: { toggle: vi.fn() },
+    style: {},
+    addEventListener(type, listener) {
+      this.listeners[type] = listener;
+    },
+    querySelector: vi.fn(),
+    replaceChildren: vi.fn(),
+    setAttribute: vi.fn(),
+    append: vi.fn(),
+    select: vi.fn(),
+    remove: vi.fn()
+  };
+
+  return element;
+}
+
+async function loadPaymentScript() {
+  const submitButton = createFakeElement();
+  const form = createFakeElement();
+  form.querySelector.mockReturnValue(submitButton);
+
+  const elements = new Map<string, FakeElement>([
+    ["#tonalli-form", form],
+    ["#birth-date", createFakeElement()],
+    ["#result", createFakeElement()],
+    ["#tonal-name", createFakeElement()],
+    ["#trecena-name", createFakeElement()],
+    ["#reading-preview", createFakeElement()],
+    ["#unlock-button", createFakeElement()],
+    ["#payment-panel", createFakeElement()],
+    ["#copy-address-button", createFakeElement()],
+    ["#copy-address-status", createFakeElement()],
+    ["#payment-txid", createFakeElement()],
+    ["#payment-confirm-button", createFakeElement()],
+    ["#full-reading-block", createFakeElement()],
+    ["#full-reading", createFakeElement()],
+    ["#status", createFakeElement()]
+  ]);
+
+  vi.stubGlobal("document", {
+    body: { append: vi.fn() },
+    createElement: vi.fn(() => createFakeElement()),
+    execCommand: vi.fn(),
+    querySelector: vi.fn((selector: string) => elements.get(selector) ?? null)
+  });
+  vi.stubGlobal("navigator", {});
+
+  await import(`${new URL("../src/public/app.js", import.meta.url).href}?test=${Date.now()}-${Math.random()}`);
+
+  return elements;
+}
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 describe("server", () => {
   it("returns service health", async () => {
@@ -36,8 +114,32 @@ describe("server", () => {
     expect(response.body).toContain('id="payment-qr-container"');
     expect(response.body).toContain('src="/payment-qr.svg"');
     expect(response.body).toContain("Escanea este código QR desde tu wallet eCash.");
+    expect(response.body).toContain("TXID o comprobante de pago");
+    expect(response.body).toContain("id=\"payment-txid\"");
     expect(response.body).toContain("En esta versión MVP, la verificación es manual.");
     expect(response.body).toContain("Continuar hacia xolosArmy.xyz");
+  });
+
+  it("renders a manual review confirmation when payment is reported without TXID", async () => {
+    const elements = await loadPaymentScript();
+
+    elements.get("#payment-confirm-button")?.listeners.click();
+
+    expect(elements.get("#status")?.textContent).toBe("Pago reportado para revisión manual.");
+    expect(elements.get("#full-reading-block")?.hidden).toBe(false);
+    expect(elements.get("#payment-panel")?.hidden).toBe(true);
+  });
+
+  it("renders a TXID confirmation when payment is reported with TXID text", async () => {
+    const elements = await loadPaymentScript();
+
+    const txidInput = elements.get("#payment-txid");
+    txidInput!.value = "  sample-txid  ";
+    elements.get("#payment-confirm-button")?.listeners.click();
+
+    expect(elements.get("#status")?.textContent).toBe("Pago reportado. TXID recibido.");
+    expect(elements.get("#full-reading-block")?.hidden).toBe(false);
+    expect(elements.get("#payment-panel")?.hidden).toBe(true);
   });
 
   it("serves a real eCash payment QR SVG", async () => {

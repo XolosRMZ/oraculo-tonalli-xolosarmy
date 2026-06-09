@@ -9,6 +9,7 @@ const paymentPanel = document.querySelector("#payment-panel");
 const paymentAddress = "ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk";
 const copyAddressButton = document.querySelector("#copy-address-button");
 const copyAddressStatus = document.querySelector("#copy-address-status");
+const paymentTxidInput = document.querySelector("#payment-txid");
 const paymentConfirmButton = document.querySelector("#payment-confirm-button");
 const fullReadingBlock = document.querySelector("#full-reading-block");
 const fullReading = document.querySelector("#full-reading");
@@ -47,6 +48,7 @@ function renderReading(reading) {
 function hideFullReading() {
   paymentPanel.hidden = true;
   copyAddressStatus.textContent = "";
+  paymentTxidInput.value = "";
   fullReadingBlock.hidden = true;
   unlockButton.hidden = false;
 }
@@ -81,6 +83,9 @@ copyAddressButton.addEventListener("click", () => {
 });
 
 paymentConfirmButton.addEventListener("click", () => {
+  const txid = paymentTxidInput.value.trim();
+
+  setStatus(txid ? "Pago reportado. TXID recibido." : "Pago reportado para revisión manual.");
   fullReadingBlock.hidden = false;
   paymentPanel.hidden = true;
 });
