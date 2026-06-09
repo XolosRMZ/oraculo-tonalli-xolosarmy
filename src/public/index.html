@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oráculo Tonalli xolosArmy</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="kicker">Calendario sagrado</p>
+        <h1 id="page-title">Oráculo Tonalli xolosArmy</h1>
+        <p class="subtitle">
+          Descubre tu Tonalli. Actívalo con XEC. Entra al camino de xolosArmy.
+        </p>
+
+        <form id="tonalli-form" class="oracle-form">
+          <label for="birth-date">Fecha de nacimiento</label>
+          <div class="form-row">
+            <input id="birth-date" name="birthDate" type="date" required />
+            <button type="submit">Descubrir mi Tonalli</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="result" class="result-panel" hidden aria-live="polite">
+        <div class="sigils">
+          <article>
+            <span>Tonal</span>
+            <strong id="tonal-name"></strong>
+          </article>
+          <article>
+            <span>Trecena</span>
+            <strong id="trecena-name"></strong>
+          </article>
+        </div>
+
+        <div class="reading-block">
+          <h2>Preview cultural</h2>
+          <p id="reading-preview"></p>
+        </div>
+
+        <div class="reading-block">
+          <h2>Lectura completa</h2>
+          <div id="full-reading" class="full-reading"></div>
+        </div>
+
+        <a class="cta" href="https://xolosarmy.xyz">Continuar hacia xolosArmy.xyz</a>
+      </section>
+
+      <p id="status" class="status" role="status"></p>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

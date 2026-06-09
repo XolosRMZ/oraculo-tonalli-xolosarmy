@@ -1,4 +1,6 @@
 import Fastify, { type FastifyInstance } from "fastify";
+import fastifyStatic from "@fastify/static";
+import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { buildTonalReading } from "./buildReading.js";
@@ -10,6 +12,10 @@ const SERVICE_NAME = "oraculo-tonalli-xolosarmy";
 export function buildServer(): FastifyInstance {
   const server = Fastify({
     logger: false
+  });
+
+  void server.register(fastifyStatic, {
+    root: join(process.cwd(), "src", "public")
   });
 
   server.get("/health", async () => ({
