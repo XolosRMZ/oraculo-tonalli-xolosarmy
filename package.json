@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
+    "dev:api": "tsx src/server.ts",
     "read:tonalli": "tsx scripts/read-tonalli.ts",
     "test:tonalpohualli": "tsx scripts/test-tonalpohualli.ts",
     "typecheck": "tsc --noEmit"
@@ -14,5 +15,8 @@
     "tsx": "^4.19.0",
     "typescript": "^5.5.0",
     "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "fastify": "^5.8.5"
   }
 }
