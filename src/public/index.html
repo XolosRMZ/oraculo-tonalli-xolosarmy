@@ -14,6 +14,11 @@
         <p class="subtitle">
           Descubre tu Tonalli. Actívalo con XEC. Entra al camino de xolosArmy.
         </p>
+        <p class="intro-copy">
+          El tonalpohualli es una cuenta sagrada mesoamericana de 260 días. Esta lectura ofrece
+          una interpretación simbólica y cultural de tu fecha de nacimiento, no una predicción
+          absoluta.
+        </p>
 
         <form id="tonalli-form" class="oracle-form">
           <label for="birth-date">Fecha de nacimiento</label>
@@ -77,12 +82,19 @@
             <input id="payment-txid" name="paymentTxid" type="text" autocomplete="off" />
           </label>
           <button id="payment-confirm-button" type="button">Ya realicé el pago</button>
-          <p>En esta versión MVP, la verificación es manual.</p>
+          <p>
+            En esta versión MVP, la verificación del pago es manual. La verificación automática con
+            Chronik será integrada en una siguiente fase.
+          </p>
         </div>
 
         <div id="full-reading-block" class="reading-block" hidden>
           <h2>Lectura completa</h2>
           <div id="full-reading" class="full-reading"></div>
+          <p class="cultural-disclaimer">
+            Lectura simbólica basada en la correlación Caso/Nicholson. El resultado se ofrece con
+            fines culturales, educativos y espirituales.
+          </p>
         </div>
 
         <a class="cta" href="https://xolosarmy.xyz">Continuar hacia xolosArmy.xyz</a>

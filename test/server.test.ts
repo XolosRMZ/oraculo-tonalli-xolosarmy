@@ -106,6 +106,9 @@ describe("server", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toContain("Descubrir mi Tonalli");
+    expect(response.body).toContain(
+      "El tonalpohualli es una cuenta sagrada mesoamericana de 260 días."
+    );
     expect(response.body).toContain("La lectura completa se desbloquea con XEC.");
     expect(response.body).toContain("Activar lectura completa con XEC");
     expect(response.body).toContain("5,000 XEC");
@@ -116,7 +119,12 @@ describe("server", () => {
     expect(response.body).toContain("Escanea este código QR desde tu wallet eCash.");
     expect(response.body).toContain("TXID o comprobante de pago");
     expect(response.body).toContain("id=\"payment-txid\"");
-    expect(response.body).toContain("En esta versión MVP, la verificación es manual.");
+    expect(response.body).toContain(
+      "En esta versión MVP, la verificación del pago es manual. La verificación automática con"
+    );
+    expect(response.body).toContain(
+      "Lectura simbólica basada en la correlación Caso/Nicholson."
+    );
     expect(response.body).toContain("Continuar hacia xolosArmy.xyz");
   });
 

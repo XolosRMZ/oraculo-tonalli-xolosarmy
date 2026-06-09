@@ -70,10 +70,18 @@ h1 {
 
 .subtitle {
   max-width: 620px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 0.85rem;
   color: var(--muted);
   font-size: clamp(1rem, 2.6vw, 1.25rem);
   line-height: 1.6;
+}
+
+.intro-copy {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  color: #eadfc8;
+  font-size: 0.98rem;
+  line-height: 1.65;
 }
 
 .oracle-form {
@@ -308,6 +316,13 @@ h2 {
 
 .full-reading p {
   margin-bottom: 1rem;
+}
+
+.cultural-disclaimer {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .cta {
