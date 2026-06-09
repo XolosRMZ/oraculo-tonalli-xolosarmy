@@ -63,8 +63,14 @@
             </div>
           </dl>
           <p id="copy-address-status" class="copy-address-status" role="status" aria-live="polite"></p>
-          <div class="qr-placeholder" aria-label="Código QR de pago eCash">
-            Escanea este código QR desde tu wallet eCash.
+          <div id="payment-qr-container" class="payment-qr" aria-label="Código QR de pago eCash">
+            <img
+              src="/payment-qr.svg"
+              width="256"
+              height="256"
+              alt="Código QR para pagar 5,000 XEC"
+            />
+            <p>Escanea este código QR desde tu wallet eCash.</p>
           </div>
           <button id="payment-confirm-button" type="button">Ya realicé el pago</button>
           <p>En esta versión MVP, la verificación es manual.</p>

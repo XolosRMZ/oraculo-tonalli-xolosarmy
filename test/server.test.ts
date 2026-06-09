@@ -33,9 +33,25 @@ describe("server", () => {
     expect(response.body).toContain("5,000 XEC");
     expect(response.body).toContain("ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk");
     expect(response.body).toContain("Copiar dirección");
+    expect(response.body).toContain('id="payment-qr-container"');
+    expect(response.body).toContain('src="/payment-qr.svg"');
     expect(response.body).toContain("Escanea este código QR desde tu wallet eCash.");
     expect(response.body).toContain("En esta versión MVP, la verificación es manual.");
     expect(response.body).toContain("Continuar hacia xolosArmy.xyz");
+  });
+
+  it("serves a real eCash payment QR SVG", async () => {
+    const server = buildServer();
+
+    const response = await server.inject({
+      method: "GET",
+      url: "/payment-qr.svg"
+    });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["content-type"]).toContain("image/svg+xml");
+    expect(response.body).toContain("<svg");
+    expect(response.body).toContain("<path");
   });
 
   it("returns a Tonalli result and reading for a valid date", async () => {

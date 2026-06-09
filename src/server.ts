@@ -2,12 +2,14 @@ import Fastify, { type FastifyInstance } from "fastify";
 import fastifyStatic from "@fastify/static";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
+import QRCode from "qrcode";
 
 import { buildTonalReading } from "./buildReading.js";
 import { calculateTonalpohualli } from "./tonalpohualli.js";
 
 const DEFAULT_PORT = 3000;
 const SERVICE_NAME = "oraculo-tonalli-xolosarmy";
+const PAYMENT_URI = "ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk?amount=5000";
 
 export function buildServer(): FastifyInstance {
   const server = Fastify({
@@ -22,6 +24,17 @@ export function buildServer(): FastifyInstance {
     ok: true,
     service: SERVICE_NAME
   }));
+
+  server.get("/payment-qr.svg", async (_request, reply) => {
+    const svg = await QRCode.toString(PAYMENT_URI, {
+      errorCorrectionLevel: "M",
+      margin: 1,
+      type: "svg",
+      width: 256
+    });
+
+    return reply.type("image/svg+xml").send(svg);
+  });
 
   server.get<{ Params: { date: string } }>("/api/tonalli/:date", async (request, reply) => {
     try {
