@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
+    "read:tonalli": "tsx scripts/read-tonalli.ts",
     "test:tonalpohualli": "tsx scripts/test-tonalpohualli.ts",
     "typecheck": "tsc --noEmit"
   },
