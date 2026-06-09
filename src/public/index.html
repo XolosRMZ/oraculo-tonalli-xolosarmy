@@ -54,9 +54,18 @@
             </div>
             <div>
               <dt>Dirección de pago</dt>
-              <dd><code>ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk</code></dd>
+              <dd class="payment-address-row">
+                <code id="payment-address">ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk</code>
+                <button id="copy-address-button" class="copy-address-button" type="button">
+                  Copiar dirección
+                </button>
+              </dd>
             </div>
           </dl>
+          <p id="copy-address-status" class="copy-address-status" role="status" aria-live="polite"></p>
+          <div class="qr-placeholder" aria-label="Código QR de pago eCash">
+            Escanea este código QR desde tu wallet eCash.
+          </div>
           <button id="payment-confirm-button" type="button">Ya realicé el pago</button>
           <p>En esta versión MVP, la verificación es manual.</p>
         </div>

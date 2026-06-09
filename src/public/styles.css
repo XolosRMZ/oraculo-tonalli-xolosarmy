@@ -225,9 +225,40 @@ h2 {
   overflow-wrap: anywhere;
 }
 
+.payment-address-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
 .payment-panel code {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 0.95rem;
+}
+
+.payment-panel .copy-address-button {
+  width: fit-content;
+  min-height: 2.4rem;
+  padding: 0 0.9rem;
+  font-size: 0.9rem;
+}
+
+.payment-panel .copy-address-status {
+  min-height: 1.3rem;
+  margin-top: 0.2rem;
+  color: var(--gold-bright);
+  font-weight: 800;
+}
+
+.qr-placeholder {
+  display: grid;
+  min-height: 7.5rem;
+  margin: 0.8rem 0 1rem;
+  place-items: center;
+  border: 1px dashed var(--line);
+  color: #eadfc8;
+  text-align: center;
 }
 
 .payment-panel button {

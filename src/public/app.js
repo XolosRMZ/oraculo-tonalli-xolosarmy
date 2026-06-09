@@ -6,6 +6,9 @@ const trecenaName = document.querySelector("#trecena-name");
 const readingPreview = document.querySelector("#reading-preview");
 const unlockButton = document.querySelector("#unlock-button");
 const paymentPanel = document.querySelector("#payment-panel");
+const paymentAddress = "ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk";
+const copyAddressButton = document.querySelector("#copy-address-button");
+const copyAddressStatus = document.querySelector("#copy-address-status");
 const paymentConfirmButton = document.querySelector("#payment-confirm-button");
 const fullReadingBlock = document.querySelector("#full-reading-block");
 const fullReading = document.querySelector("#full-reading");
@@ -43,13 +46,38 @@ function renderReading(reading) {
 
 function hideFullReading() {
   paymentPanel.hidden = true;
+  copyAddressStatus.textContent = "";
   fullReadingBlock.hidden = true;
   unlockButton.hidden = false;
+}
+
+async function copyPaymentAddress() {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(paymentAddress);
+  } else {
+    const textarea = document.createElement("textarea");
+    textarea.value = paymentAddress;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "absolute";
+    textarea.style.left = "-9999px";
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+  }
+
+  copyAddressStatus.textContent = "Dirección copiada.";
 }
 
 unlockButton.addEventListener("click", () => {
   paymentPanel.hidden = false;
   unlockButton.hidden = true;
+});
+
+copyAddressButton.addEventListener("click", () => {
+  copyPaymentAddress().catch(() => {
+    copyAddressStatus.textContent = "No se pudo copiar la dirección.";
+  });
 });
 
 paymentConfirmButton.addEventListener("click", () => {

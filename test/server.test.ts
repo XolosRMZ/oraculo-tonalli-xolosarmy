@@ -32,6 +32,8 @@ describe("server", () => {
     expect(response.body).toContain("Activar lectura completa con XEC");
     expect(response.body).toContain("5,000 XEC");
     expect(response.body).toContain("ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk");
+    expect(response.body).toContain("Copiar dirección");
+    expect(response.body).toContain("Escanea este código QR desde tu wallet eCash.");
     expect(response.body).toContain("En esta versión MVP, la verificación es manual.");
     expect(response.body).toContain("Continuar hacia xolosArmy.xyz");
   });
