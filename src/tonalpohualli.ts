@@ -99,10 +99,9 @@ export function calculateTonalpohualli(inputDate: string): TonalpohualliResult {
   const tonalSignIndex = mod(anchorSignIndex + deltaDaysFromAnchor, signs.length);
   const tonalSign = signs[tonalSignIndex];
 
-  // A trecena is the 13-day period named for its first day. The documented
-  // app fixture places 13 Ollin in 1 Cuetzpalin; this convention steps backward
-  // by the current number for non-1 days, while a number-1 day names itself.
-  const trecenaOffset = tonalNumber === 1 ? 0 : tonalNumber;
+  // A trecena is the 13-day period named for its first day, found by stepping
+  // backward tonalNumber - 1 days from the current tonal date.
+  const trecenaOffset = tonalNumber - 1;
   const trecenaSignIndex = mod(tonalSignIndex - trecenaOffset, signs.length);
   const trecenaSign = signs[trecenaSignIndex];
   const trecenaNumber = 1;

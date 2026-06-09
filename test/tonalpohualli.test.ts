@@ -23,7 +23,7 @@ describe("calculateTonalpohualli", () => {
     expect(result.tonalName).toBe("1 Coatl");
   });
 
-  it("returns 13 Ollin and trecena 1 Cuetzpalin for 1992-03-18", () => {
+  it("returns 13 Ollin and trecena 1 Coatl for 1992-03-18", () => {
     const result = calculateTonalpohualli("1992-03-18");
 
     expect(result.tonalNumber).toBe(13);
@@ -32,10 +32,10 @@ describe("calculateTonalpohualli", () => {
     expect(result.tonalSignSpanish).toBe("Movimiento");
     expect(result.tonalName).toBe("13 Ollin");
     expect(result.trecenaNumber).toBe(1);
-    expect(result.trecenaSignIndex).toBe(3);
-    expect(result.trecenaSignNahuatl).toBe("Cuetzpalin");
-    expect(result.trecenaSignSpanish).toBe("Lagartija");
-    expect(result.trecenaName).toBe("1 Cuetzpalin");
+    expect(result.trecenaSignIndex).toBe(4);
+    expect(result.trecenaSignNahuatl).toBe("Coatl");
+    expect(result.trecenaSignSpanish).toBe("Serpiente");
+    expect(result.trecenaName).toBe("1 Coatl");
   });
 
   it("returns defined tonal data for 1492-10-12", () => {
