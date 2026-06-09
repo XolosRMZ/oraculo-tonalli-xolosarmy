@@ -185,6 +185,61 @@ h2 {
   line-height: 1.7;
 }
 
+.unlock-message {
+  margin-bottom: 0;
+  color: var(--gold-bright);
+  font-weight: 800;
+}
+
+.unlock-button {
+  width: 100%;
+  margin-top: 1.35rem;
+}
+
+.payment-panel {
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  background: var(--panel-soft);
+  padding: 1rem;
+}
+
+.payment-panel dl {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.payment-panel dt {
+  margin-bottom: 0.25rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.payment-panel dd {
+  margin: 0;
+  color: var(--gold-bright);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.payment-panel code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.95rem;
+}
+
+.payment-panel button {
+  width: 100%;
+}
+
+.payment-panel p {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .full-reading p {
   margin-bottom: 1rem;
 }

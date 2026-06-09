@@ -18,6 +18,24 @@ describe("server", () => {
     });
   });
 
+  it("serves the payment-gated Tonalli shell", async () => {
+    const server = buildServer();
+
+    const response = await server.inject({
+      method: "GET",
+      url: "/"
+    });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toContain("Descubrir mi Tonalli");
+    expect(response.body).toContain("La lectura completa se desbloquea con XEC.");
+    expect(response.body).toContain("Activar lectura completa con XEC");
+    expect(response.body).toContain("5,000 XEC");
+    expect(response.body).toContain("ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk");
+    expect(response.body).toContain("En esta versión MVP, la verificación es manual.");
+    expect(response.body).toContain("Continuar hacia xolosArmy.xyz");
+  });
+
   it("returns a Tonalli result and reading for a valid date", async () => {
     const server = buildServer();
 

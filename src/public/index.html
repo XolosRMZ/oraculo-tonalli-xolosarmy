@@ -39,9 +39,29 @@
         <div class="reading-block">
           <h2>Preview cultural</h2>
           <p id="reading-preview"></p>
+          <p class="unlock-message">La lectura completa se desbloquea con XEC.</p>
         </div>
 
-        <div class="reading-block">
+        <button id="unlock-button" class="unlock-button" type="button">
+          Activar lectura completa con XEC
+        </button>
+
+        <div id="payment-panel" class="payment-panel" hidden>
+          <dl>
+            <div>
+              <dt>Precio</dt>
+              <dd>5,000 XEC</dd>
+            </div>
+            <div>
+              <dt>Dirección de pago</dt>
+              <dd><code>ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk</code></dd>
+            </div>
+          </dl>
+          <button id="payment-confirm-button" type="button">Ya realicé el pago</button>
+          <p>En esta versión MVP, la verificación es manual.</p>
+        </div>
+
+        <div id="full-reading-block" class="reading-block" hidden>
           <h2>Lectura completa</h2>
           <div id="full-reading" class="full-reading"></div>
         </div>

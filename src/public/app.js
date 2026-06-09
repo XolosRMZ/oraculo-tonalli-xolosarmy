@@ -4,6 +4,10 @@ const resultPanel = document.querySelector("#result");
 const tonalName = document.querySelector("#tonal-name");
 const trecenaName = document.querySelector("#trecena-name");
 const readingPreview = document.querySelector("#reading-preview");
+const unlockButton = document.querySelector("#unlock-button");
+const paymentPanel = document.querySelector("#payment-panel");
+const paymentConfirmButton = document.querySelector("#payment-confirm-button");
+const fullReadingBlock = document.querySelector("#full-reading-block");
 const fullReading = document.querySelector("#full-reading");
 const status = document.querySelector("#status");
 const submitButton = form.querySelector("button");
@@ -37,6 +41,22 @@ function renderReading(reading) {
   );
 }
 
+function hideFullReading() {
+  paymentPanel.hidden = true;
+  fullReadingBlock.hidden = true;
+  unlockButton.hidden = false;
+}
+
+unlockButton.addEventListener("click", () => {
+  paymentPanel.hidden = false;
+  unlockButton.hidden = true;
+});
+
+paymentConfirmButton.addEventListener("click", () => {
+  fullReadingBlock.hidden = false;
+  paymentPanel.hidden = true;
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -61,6 +81,7 @@ form.addEventListener("submit", async (event) => {
     trecenaName.textContent = payload.result.trecenaName;
     readingPreview.textContent = buildPreview(payload.reading);
     renderReading(payload.reading);
+    hideFullReading();
     resultPanel.hidden = false;
     setStatus("");
   } catch (error) {
