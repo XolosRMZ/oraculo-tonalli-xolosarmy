@@ -128,6 +128,38 @@ describe("server", () => {
     expect(response.body).toContain("Continuar hacia xolosArmy.xyz");
   });
 
+  it("serves Google-readable sitemap and robots files from the domain root", async () => {
+    const server = buildServer();
+
+    const sitemapResponse = await server.inject({
+      method: "GET",
+      url: "/sitemap.xml"
+    });
+    const robotsResponse = await server.inject({
+      method: "GET",
+      url: "/robots.txt"
+    });
+
+    expect(sitemapResponse.statusCode).toBe(200);
+    expect(sitemapResponse.headers["content-type"]).toContain("application/xml");
+    expect(sitemapResponse.body).toBe(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://tonalli.xolosarmy.xyz/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+`);
+    expect(robotsResponse.statusCode).toBe(200);
+    expect(robotsResponse.body).toBe(`User-agent: *
+Allow: /
+
+Sitemap: https://tonalli.xolosarmy.xyz/sitemap.xml
+`);
+  });
+
   it("renders a manual review confirmation when payment is reported without TXID", async () => {
     const elements = await loadPaymentScript();
 
