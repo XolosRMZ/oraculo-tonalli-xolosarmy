@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tonalli.xolosarmy.xyz/sitemap.xml
