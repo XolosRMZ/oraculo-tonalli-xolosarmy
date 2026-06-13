@@ -1,6 +1,6 @@
 import Fastify, { type FastifyInstance } from "fastify";
 import fastifyStatic from "@fastify/static";
-import { dirname, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import QRCode from "qrcode";
 
@@ -17,7 +17,12 @@ export function buildServer(): FastifyInstance {
   });
 
   void server.register(fastifyStatic, {
-    root: publicRoot
+    root: publicRoot,
+    setHeaders(response, pathName) {
+      if (basename(pathName) === "sitemap.xml") {
+        response.setHeader("content-type", "application/xml; charset=UTF-8");
+      }
+    }
   });
 
   server.get("/health", async () => ({
