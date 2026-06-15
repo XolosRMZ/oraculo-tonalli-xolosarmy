@@ -3,104 +3,111 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Oráculo Tonalli xolosArmy</title>
+    <title>Oráculo Tonalli xolosArmy - Enlace Cyber-Azteca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="letterbox top"></div>
+    <div class="letterbox bottom"></div>
+
     <main class="shell">
-      <section class="hero" aria-labelledby="page-title">
-        <p class="kicker">Calendario sagrado</p>
-        <h1 id="page-title">Oráculo Tonalli xolosArmy</h1>
+      <section class="hero cyber-panel" aria-labelledby="page-title">
+        <p class="kicker" data-text="SISTEMA_TONALPOHUALLI_V.01">SISTEMA_TONALPOHUALLI_V.01</p>
+        <h1 id="page-title" class="glitch-title">ORÁCULO TONALLI<br/><span class="neon-gold">xolosArmy</span></h1>
         <p class="subtitle">
-          Descubre tu Tonalli. Actívalo con XEC. Entra al camino de xolosArmy.
+          DESCUBRE TU TONALLI. ACTÍVALO CON XEC. ENTRA AL CAMINO.
         </p>
         <p class="intro-copy">
-          El tonalpohualli es una cuenta sagrada mesoamericana de 260 días. Esta lectura ofrece
-          una interpretación simbólica y cultural de tu fecha de nacimiento, no una predicción
-          absoluta.
+          El tonalpohualli es una cuenta sagrada mesoamericana de 260 días. Esta terminal ofrece
+          una decodificación simbólica y cultural de tu ciclo de nacimiento.
         </p>
 
         <form id="tonalli-form" class="oracle-form">
-          <label for="birth-date">Fecha de nacimiento</label>
+          <label for="birth-date">INGRESO DE FECHA [YYYY-MM-DD]</label>
           <div class="form-row">
             <input id="birth-date" name="birthDate" type="date" required />
-            <button type="submit">Descubrir mi Tonalli</button>
+            <button type="submit" class="cyber-button">INICIAR ESCANEO</button>
           </div>
         </form>
       </section>
 
-      <section id="result" class="result-panel" hidden aria-live="polite">
+      <section id="result" class="result-panel cyber-panel" hidden aria-live="polite">
         <div class="sigils">
-          <article>
-            <span>Tonal</span>
-            <strong id="tonal-name"></strong>
+          <article class="data-box">
+            <span>[TONAL]</span>
+            <strong id="tonal-name" class="neon-cyan"></strong>
           </article>
-          <article>
-            <span>Trecena</span>
-            <strong id="trecena-name"></strong>
+          <article class="data-box">
+            <span>[TRECENA]</span>
+            <strong id="trecena-name" class="neon-cyan"></strong>
           </article>
         </div>
 
-        <div class="reading-block">
-          <h2>Preview cultural</h2>
-          <p id="reading-preview"></p>
-          <p class="unlock-message">La lectura completa se desbloquea con XEC.</p>
+        <div class="reading-block border-top-neon">
+          <h2>[ PREVIEW CULTURAL ]</h2>
+          <p id="reading-preview" class="terminal-text"></p>
+          <p class="unlock-message blinking">ACCESO RESTRINGIDO. REQUIERE DESBLOQUEO XEC.</p>
         </div>
 
-        <button id="unlock-button" class="unlock-button" type="button">
-          Activar lectura completa con XEC
+        <button id="unlock-button" class="unlock-button cyber-button" type="button">
+          ACTIVAR PROTOCOLO DE PAGO
         </button>
 
-        <div id="payment-panel" class="payment-panel" hidden>
+        <div id="payment-panel" class="payment-panel data-box" hidden>
           <dl>
             <div>
-              <dt>Precio</dt>
-              <dd>5,000 XEC</dd>
+              <dt>TARIFA DE ENLACE</dt>
+              <dd class="neon-gold">5,000 XEC</dd>
             </div>
             <div>
-              <dt>Dirección de pago</dt>
+              <dt>DIRECCIÓN DE NODO</dt>
               <dd class="payment-address-row">
                 <code id="payment-address">ecash:qq7qn90ev23ecastqmn8as00u8mcp4tzsspvt5dtlk</code>
-                <button id="copy-address-button" class="copy-address-button" type="button">
-                  Copiar dirección
+                <button id="copy-address-button" class="copy-address-button cyber-button-alt" type="button">
+                  COPIAR
                 </button>
               </dd>
             </div>
           </dl>
           <p id="copy-address-status" class="copy-address-status" role="status" aria-live="polite"></p>
           <div id="payment-qr-container" class="payment-qr" aria-label="Código QR de pago eCash">
-            <img
-              src="/payment-qr.svg"
-              width="256"
-              height="256"
-              alt="Código QR para pagar 5,000 XEC"
-            />
-            <p>Escanea este código QR desde tu wallet eCash.</p>
+            <div class="qr-wrapper">
+              <img
+                src="/payment-qr.svg"
+                width="256"
+                height="256"
+                alt="Código QR para pagar 5,000 XEC"
+              />
+            </div>
+            <p class="terminal-text small">ESCANEAR CÓDIGO DESDE TERMINAL ECASH</p>
           </div>
           <label class="payment-txid-field" for="payment-txid">
-            TXID o comprobante de pago
-            <input id="payment-txid" name="paymentTxid" type="text" autocomplete="off" />
+            INGRESE TXID / HASH DE CONFIRMACIÓN
+            <input id="payment-txid" name="paymentTxid" type="text" autocomplete="off" placeholder="0x..." />
           </label>
-          <button id="payment-confirm-button" type="button">Ya realicé el pago</button>
-          <p>
-            En esta versión MVP, la verificación del pago es manual. La verificación automática con
-            Chronik será integrada en una siguiente fase.
+          <button id="payment-confirm-button" class="cyber-button" type="button">VERIFICAR TRANSACCIÓN</button>
+          <p class="small text-muted">
+            * MVP: La validación automatizada vía Chronik está en desarrollo. Autorización manual requerida.
           </p>
         </div>
 
-        <div id="full-reading-block" class="reading-block" hidden>
-          <h2>Lectura completa</h2>
-          <div id="full-reading" class="full-reading"></div>
+        <div id="full-reading-block" class="reading-block border-top-neon" hidden>
+          <h2>[ DECODIFICACIÓN COMPLETA ]</h2>
+          <div id="full-reading" class="full-reading terminal-text"></div>
           <p class="cultural-disclaimer">
-            Lectura simbólica basada en la correlación Caso/Nicholson. El resultado se ofrece con
-            fines culturales, educativos y espirituales.
+            // AVISO: Datos correlacionados vía Caso/Nicholson. Uso exclusivo para sincronización cultural y espiritual.
           </p>
         </div>
 
-        <a class="cta" href="https://xolosarmy.xyz">Continuar hacia xolosArmy.xyz</a>
+        <a class="cta cyber-button-alt mt-space" href="https://xolosarmy.xyz">DESCONECTAR -> xolosArmy.xyz</a>
       </section>
 
-      <p id="status" class="status" role="status"></p>
+      <p id="status" class="status terminal-text" role="status"></p>
     </main>
 
     <script src="/app.js" type="module"></script>
